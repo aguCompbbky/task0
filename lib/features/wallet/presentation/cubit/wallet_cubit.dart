@@ -1,20 +1,17 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wallet1/features/wallet/data/models/wallet_model.dart';
+import 'package:wallet1/features/wallet/domain/usecases/create_wallet.dart';
 
-import 'package:bloc/bloc.dart';
-import '../../domain/usecases/create_wallet.dart';
-part 'wallet_state.dart';
+class WalletCubit extends Cubit<WalletModel?> {
+  final CreateWallet _createWallet;
 
-class WalletCubit extends Cubit<WalletState> {
-  final CreateWallet createWallet;
+  WalletCubit(this._createWallet) : super(null);
+  
 
-  WalletCubit(this.createWallet) : super(WalletInitial());
-
-  Future<void> generate() async {
-    emit(WalletLoading());
-    try {
-      final pubkey = await createWallet();
-      emit(WalletCreated(pubkey));
-    } catch (e) {
-      emit(WalletError(e.toString()));
-    }
+  Future<void> create() async {
+   print("🔵 WalletCubit: create() çağrıldı");
+  final wallet = await _createWallet();
+  print("🟢 WalletCubit: wallet sonucu -> $wallet");
+  emit(wallet); // burası null olabilir
   }
 }

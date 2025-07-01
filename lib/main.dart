@@ -9,17 +9,17 @@ import 'features/wallet/presentation/pages/create_wallet_page.dart';
 void main() {
   runApp(const MyApp());
 }
+
 final SolanaRepository repository = SolanaRepositoryImpl();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-  create: (context) => WalletCubit(CreateWallet(repository)), 
-  child: MaterialApp(home: CreateWalletPage()), // UI
-);
+      create: (context) => WalletCubit(CreateWallet(repository)),
+      child: MaterialApp(home: CreateWalletPage()), // UI
+    );
   }
 }
-
